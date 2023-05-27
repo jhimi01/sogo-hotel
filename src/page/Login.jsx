@@ -1,19 +1,25 @@
-import { Link } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 
 import { FcGoogle } from 'react-icons/fc'
-import { useContext } from 'react'
+import { useContext, useRef } from 'react'
 import { AuthContext } from '../providers/AuthProvider'
 import { Toaster, toast } from 'react-hot-toast'
 import { ImSpinner3 } from "react-icons/im";
 
 const Login = () => {
 
-    const { signIn, signInWithGoogle,  loading, setLoading, } = useContext(AuthContext)
+    const emailRef = useRef()
+    const { signIn, signInWithGoogle,  loading, setLoading, resetPassword } = useContext(AuthContext)
+    const navigate = useNavigate()
+    const location = useLocation()
+    const from = location.state?.from?.pathname || '/';
 
     const handlegoogle =()=>{
         signInWithGoogle()
         .then(result => {
             console.log(result.user)
+            toast.success('Successfully logged in!')
+            navigate(from, {replace: true})
         })
         .catch(err => {
             console.log(err.message)
@@ -23,21 +29,33 @@ const Login = () => {
         });
     }
 
+    const handleReset =()=>{
+      const email = emailRef.current.value;
+      resetPassword(email)
+      .then(()=>{
+        setLoading(false)
+        toast.success('Please check your email for reset password')
+      })
+      .catch(err=>{
+        console.log(err.message)
+      })
+    }
+
 
     const handlelogin =(e)=>{
         e.preventDefault();
         const form = e.target;
         const email = form.email.value;
         const password = form.password.value;
-        //   console.log(email, password)
-
-          signIn(email, password)
+         signIn(email, password)
           .then(result =>{
             console.log(result.user)
+            navigate(from, {replace: true})
+            toast.success('Successfully logged in!')
           })
           .catch(error => {
             console.log(error.message)
-            toast.error(err.message)
+            toast.error(error.message)
             setLoading(false)
           })
 
@@ -51,10 +69,7 @@ const Login = () => {
     <div className='flex justify-center items-center min-h-screen'>
       <div className='flex flex-col max-w-md p-6 rounded-md sm:p-10 bg-gray-100 text-gray-900'>
         <div className='mb-8 text-center'>
-          <h1 className='my-3 text-4xl font-bold'>Log In</h1>
-          <p className='text-sm text-gray-400'>
-            Sign in to access your account
-          </p>
+          <h1 className='my-3 text-4xl font-bold'>Please LogIn</h1>
         </div>
         <form
           noValidate=''
@@ -68,6 +83,7 @@ const Login = () => {
                 Email address
               </label>
               <input
+              ref={emailRef}
                 type='email'
                 name='email'
                 id='email'
@@ -104,7 +120,7 @@ const Login = () => {
           </div>
         </form>
         <div className='space-y-1'>
-          <button className='text-xs hover:underline hover:text-gray-800 text-gray-400'>
+          <button onClick={handleReset} className='text-xs hover:underline hover:text-gray-800 text-gray-400'>
             Forgot password?
           </button>
         </div>
@@ -127,10 +143,7 @@ const Login = () => {
           .
         </p>
       </div>
-      <Toaster
-  position="top-center"
-  reverseOrder={false}
-/>
+     
     </div>
   )
 }

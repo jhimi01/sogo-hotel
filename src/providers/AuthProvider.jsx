@@ -11,6 +11,7 @@ import {
   updateProfile,
 } from 'firebase/auth'
 import app from '../firebase/firebase.config'
+import { Toaster } from 'react-hot-toast'
 
 
 export const AuthContext = createContext(null)
@@ -78,7 +79,14 @@ const AuthProvider = ({ children }) => {
   }
 
   return (
+    <>
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
+    <Toaster
+  position="top-center"
+  reverseOrder={false}
+/>
+    </>
+    
   )
 }
 
