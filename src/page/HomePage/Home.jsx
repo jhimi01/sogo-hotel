@@ -1,5 +1,5 @@
 import React from 'react';
-import Catagories from '../component/Catagories/Catagories';
+import Catagories from '../../component/Catagories/Catagories';
 
 const Home = () => {
     return (

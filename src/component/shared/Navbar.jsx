@@ -1,14 +1,28 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { FaSistrix } from "react-icons/fa";
+import { RxAvatar } from "react-icons/rx";
 import logo from '../../assets/logo.png'
+import { Link, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../providers/AuthProvider';
 
 const Navbar = () => {
+
+  const { user, logOut } = useContext(AuthContext)
+  console.log(user)
+  const navigate = useNavigate()
+
+  const handlelogout =()=>{
+    logOut()
+    .then(()=>{})
+    .catch(error => console.log(error.message))
+  }
+
     return (
         <div className="navbar bg-base-200 drop-shadow-lg mt-5">
         <div className="navbar-start">
         <div className=" flex">
         <img src={logo} alt="logo" width='30px' />
-          <a className="btn btn-ghost normal-case text-xl">sogo Hotel</a>
+          <Link to='/'><a className="btn btn-ghost normal-case text-xl">sogo Hotel</a></Link>
         </div>
         </div>
         <div className="navbar-center">
@@ -49,18 +63,19 @@ const Navbar = () => {
           <div className="dropdown dropdown-end">
             <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
               <div className="w-10 rounded-full">
-                <img src="/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+              {user?   <img src={user?.photoURL} /> : <img src='https://cdn-icons-png.flaticon.com/256/149/149071.png'/>}
               </div>
             </label>
             <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
               <li>
-                <a className="justify-between">
+                <p className="justify-between">
                   Profile
                   <span className="badge">New</span>
-                </a>
+                </p>
               </li>
-              <li><a>Settings</a></li>
-              <li><a>Logout</a></li>
+              <li><p>Settings</p></li>
+              {user? <button onClick={handlelogout} className='btn'>LogOut</button> :  <Link to='/login'><li><p>Login</p></li></Link>}
+              
             </ul>
           </div>
         </div>
