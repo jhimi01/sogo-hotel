@@ -11,6 +11,8 @@ import Home from './page/HomePage/Home.jsx';
 import Login from './page/Login.jsx';
 import AuthProvider from './providers/AuthProvider.jsx';
 import Register from './page/Register.jsx';
+import RoomDetails from './page/RoomDetails.jsx';
+import Privateroute from './routes/Privateroute.jsx';
 
 
 const router = createBrowserRouter([
@@ -21,7 +23,12 @@ const router = createBrowserRouter([
       {
         path: '/',
         element: <Home></Home>
-      },{
+      },
+      {
+        path: '/room/:id',
+        element: <Privateroute><RoomDetails></RoomDetails></Privateroute>
+      },
+      ,{
         path: '/login',
         element: <Login></Login>
       },{
