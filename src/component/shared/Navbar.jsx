@@ -1,15 +1,29 @@
 import React from 'react';
+import { FaSistrix } from "react-icons/fa";
 
 const Navbar = () => {
     return (
-        <div className="navbar bg-base-100">
+        <div className="navbar bg-base-100 drop-shadow-lg mt-5">
         <div className="navbar-start">
         <div className="flex-1">
-          <a className="btn btn-ghost normal-case text-xl">daisyUI</a>
+          <a className="btn btn-ghost normal-case text-xl">sogo Hotel</a>
         </div>
         </div>
         <div className="navbar-center">
-    <a className="btn btn-ghost normal-case text-xl">daisyUI</a>
+        <div className='border-[1px] w-full md:w-auto py-2 rounded-full shadow-sm hover:shadow-md transition cursor-pointer'>
+      <div className='flex flex-row items-center justify-between'>
+        <div className='text-sm font-semibold px-6'>Anywhere</div>
+        <div className='hidden sm:block text-sm font-semibold px-6 border-x-[1px] flex-1 text-center'>
+          Any Week
+        </div>
+        <div className='text-sm pl-6 pr-2 text-gray-600 flex flex-row items-center gap-3'>
+          <div className='hidden sm:block'>Add Guests</div>
+          <div className='p-2 bg-rose-500 rounded-full text-white'>
+            <FaSistrix size={18} />
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
   <div className="navbar-end">
         <div className="flex-none">
