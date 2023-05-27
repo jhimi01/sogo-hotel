@@ -22,11 +22,11 @@ const Navbar = () => {
         <div className="navbar-start">
         <div className=" flex items-center">
         <img src={logo} alt="logo" width='40px' />
-          <Link to='/'><a className="btn btn-ghost normal-case text-lg hidden md:block">Sogo Hotel</a></Link>
+          <Link to='/'><a className="btn btn-ghost normal-case text-lg hidden md:block pt-2">Sogo Hotel</a></Link>
         </div>
         </div>
         <div className="navbar-center">
-        <div className='border-[1px] w-full md:w-auto py-2 rounded-full shadow-sm hover:shadow-md transition cursor-pointer'>
+        <div className='border-[1px] w-full md:w-auto py-2 rounded-0 shadow-sm hover:shadow-md transition cursor-pointer'>
       <div className='flex flex-row items-center justify-between'>
         <div className='text-sm font-semibold px-6'>Anywhere</div>
         <div className='hidden sm:block text-sm font-semibold px-6 border-x-[1px] flex-1 text-center'>
