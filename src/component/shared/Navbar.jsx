@@ -1,11 +1,13 @@
 import React from 'react';
 import { FaSistrix } from "react-icons/fa";
+import logo from '../../assets/logo.png'
 
 const Navbar = () => {
     return (
-        <div className="navbar bg-base-100 drop-shadow-lg mt-5">
+        <div className="navbar bg-base-200 drop-shadow-lg mt-5">
         <div className="navbar-start">
-        <div className="flex-1">
+        <div className=" flex">
+        <img src={logo} alt="logo" width='30px' />
           <a className="btn btn-ghost normal-case text-xl">sogo Hotel</a>
         </div>
         </div>
@@ -18,7 +20,7 @@ const Navbar = () => {
         </div>
         <div className='text-sm pl-6 pr-2 text-gray-600 flex flex-row items-center gap-3'>
           <div className='hidden sm:block'>Add Guests</div>
-          <div className='p-2 bg-rose-500 rounded-full text-white'>
+          <div className='p-2 bg-black rounded-full text-white'>
             <FaSistrix size={18} />
           </div>
         </div>

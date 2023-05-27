@@ -1,14 +1,16 @@
 import React from 'react';
 import Navbar from '../component/shared/Navbar';
+import { Outlet } from 'react-router-dom';
 
 const Main = () => {
     return (
 
        <>
-         <div className='w-full md:w-5/6 mx-auto'>
+         <div className='w-full md:w-[90%] mx-auto'>
         <Navbar></Navbar>
-        <button className='btn btn-active'>button</button>
+        <Outlet></Outlet>
         </div>
+
        </>
     );
 };
