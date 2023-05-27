@@ -8,7 +8,9 @@ const Main = () => {
        <>
          <div className='w-full md:w-[90%] mx-auto'>
         <Navbar></Navbar>
+        <div>
         <Outlet></Outlet>
+        </div>
         </div>
 
        </>

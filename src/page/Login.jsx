@@ -8,19 +8,44 @@ import { ImSpinner3 } from "react-icons/im";
 
 const Login = () => {
 
-    const { signInWithGoogle,  loading, setLoading, } = useContext(AuthContext)
+    const { signIn, signInWithGoogle,  loading, setLoading, } = useContext(AuthContext)
 
     const handlegoogle =()=>{
         signInWithGoogle()
         .then(result => {
             console.log(result.user)
-            setLoading(false)
         })
         .catch(err => {
             console.log(err.message)
             toast.error(err.message)
+            setLoading(false)
+            
         });
     }
+
+
+    const handlelogin =(e)=>{
+        e.preventDefault();
+        const form = e.target;
+        const email = form.email.value;
+        const password = form.password.value;
+        //   console.log(email, password)
+
+          signIn(email, password)
+          .then(result =>{
+            console.log(result.user)
+          })
+          .catch(error => {
+            console.log(error.message)
+            toast.error(err.message)
+            setLoading(false)
+          })
+
+    }
+
+
+
+
 
   return (
     <div className='flex justify-center items-center min-h-screen'>
@@ -35,6 +60,7 @@ const Login = () => {
           noValidate=''
           action=''
           className='space-y-6 ng-untouched ng-pristine ng-valid'
+          onSubmit={handlelogin}
         >
           <div className='space-y-4'>
             <div>
