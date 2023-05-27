@@ -20,8 +20,8 @@ const Navbar = () => {
     return (
         <div className="navbar bg-base-200 drop-shadow-lg mt-5">
         <div className="navbar-start">
-        <div className=" flex">
-        <img src={logo} alt="logo" width='30px' />
+        <div className=" flex items-center">
+        <img src={logo} alt="logo" width='40px' />
           <Link to='/'><a className="btn btn-ghost normal-case text-lg hidden md:block">Sogo Hotel</a></Link>
         </div>
         </div>
