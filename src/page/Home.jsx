@@ -1,9 +1,10 @@
 import React from 'react';
+import Catagories from '../component/Catagories/Catagories';
 
 const Home = () => {
     return (
         <div>
-            <h2>this is home</h2>
+           <Catagories></Catagories>
         </div>
     );
 };
