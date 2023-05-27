@@ -4,14 +4,87 @@ import { FcGoogle } from 'react-icons/fc'
 import { useContext, useRef } from 'react'
 import { AuthContext } from '../providers/AuthProvider'
 import { ImSpinner3 } from 'react-icons/im'
+import { toast } from 'react-hot-toast'
 
 const Register = () => {
 
     const emailRef = useRef()
-    const { signIn, signInWithGoogle,  loading, setLoading, resetPassword } = useContext(AuthContext)
+    const { createUser, signInWithGoogle,  loading, setLoading, updateUserProfile} = useContext(AuthContext)
     const navigate = useNavigate()
     const location = useLocation()
     const from = location.state?.from?.pathname || '/';
+
+    // https://api.imgbb.com/1/upload
+
+
+    const handleSubmit =(e)=>{
+        e.preventDefault();
+        const form = e.target;
+        const name = form.name.value;
+        const email = form.email.value;
+        const password = form.password.value;
+
+        const image = form.image.files[0];
+        const formData = new FormData();
+        formData.append('image', image);
+
+        const url = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMGBB_KEY}`
+
+        fetch(url, {
+            method: 'POST',
+            body: formData
+        }).then(res => res.json())
+        .then(data => {
+            const imgurl = data.data.display_url
+            createUser(email, password)
+            .then((result) => {
+                updateUserProfile(name, imgurl)
+                .then(() => {
+                    navigate(from, {replace: true})
+                    toast.success('Successfully registerd!')
+                })
+                .catch(err => {
+                    console.log(err.message)
+                    toast.error(err.message)
+                    setLoading(false)
+                    
+                });
+            })
+            .catch(err => {
+                toast.error(err.message)
+                setLoading(false)
+                
+            });
+
+        }).catch(err => {
+            console.log(err.message)
+            toast.error(err.message)
+            setLoading(false)
+            
+        });
+
+      
+        
+        console.log(formData)
+        console.log(url)
+
+    }
+
+
+    const handlegoogle =()=>{
+        signInWithGoogle()
+        .then(result => {
+            console.log(result.user)
+            toast.success('Successfully logged in!')
+            navigate(from, {replace: true})
+        })
+        .catch(err => {
+            console.log(err.message)
+            toast.error(err.message)
+            setLoading(false)
+            
+        });
+    }
 
   return (
     <div className='flex justify-center items-center min-h-screen mt-2'>
@@ -24,6 +97,7 @@ const Register = () => {
           noValidate=''
           action=''
           className='space-y-6 ng-untouched ng-pristine ng-valid'
+          onSubmit={handleSubmit}
         >
           <div className='space-y-4'>
             <div>
@@ -86,7 +160,7 @@ const Register = () => {
           </div>
 
           <div>
-            <button
+          <button
               type='submit'
               className='btn w-full hover:bg-gray-950'
             >
@@ -101,7 +175,7 @@ const Register = () => {
           </p>
           <div className='flex-1 h-px sm:w-16 dark:bg-gray-700'></div>
         </div>
-        <div className='flex justify-center items-center space-x-2 border m-3 p-2 border-gray-300 border-rounded cursor-pointer'>
+        <div onClick={handlegoogle} className='flex justify-center items-center space-x-2 border m-3 p-2 border-gray-300 border-rounded cursor-pointer'>
           <FcGoogle size={32} />
 
           <p>Continue with Google</p>

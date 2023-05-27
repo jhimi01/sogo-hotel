@@ -5,12 +5,20 @@ import { initializeApp } from "firebase/app";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyD7aGQsQHtjFdztkWnaDI5GlraoAYQvIA8",
-  authDomain: "sogo-hotel.firebaseapp.com",
-  projectId: "sogo-hotel",
-  storageBucket: "sogo-hotel.appspot.com",
-  messagingSenderId: "743292719890",
-  appId: "1:743292719890:web:eb57c09afe47376f2859cb"
+  // apiKey: "AIzaSyD7aGQsQHtjFdztkWnaDI5GlraoAYQvIA8",
+  // authDomain: "sogo-hotel.firebaseapp.com",
+  // projectId: "sogo-hotel",
+  // storageBucket: "sogo-hotel.appspot.com",
+  // messagingSenderId: "743292719890",
+  // appId: "1:743292719890:web:eb57c09afe47376f2859cb"
+  apiKey:import.meta.env.VITE_apiKey,
+  authDomain:import.meta.env.VITE_authDomain,
+  projectId:import.meta.env.VITE_projectId,
+  storageBucket:import.meta.env.VITE_storageBucket,
+  messagingSenderId:import.meta.env.VITE_messagingSenderId,
+  appId:import.meta.env.VITE_appId
+
+
 };
 
 // Initialize Firebase
