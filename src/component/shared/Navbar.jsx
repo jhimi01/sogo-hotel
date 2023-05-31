@@ -72,7 +72,8 @@ const Navbar = () => {
                   <span className="badge">New</span>
                 </p>
               </li>
-              <li><p>Settings</p></li>
+              <Link to='/' className='md:hidden text-xl font-semibold'><li><p>Home</p></li></Link>
+              <Link to='/dashboard'  className='text-xl font-semibold'><li><p>Dashboard</p></li></Link>
               {user? <button onClick={handlelogout} className='btn'>LogOut</button> :  <Link to='/login'><li><p>Login</p></li></Link>}
               
             </ul>

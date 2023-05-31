@@ -5,6 +5,7 @@ import { useContext, useRef } from 'react'
 import { AuthContext } from '../providers/AuthProvider'
 import { ImSpinner3 } from 'react-icons/im'
 import { toast } from 'react-hot-toast'
+import { saveUser } from '../api/auth'
 
 const Register = () => {
 
@@ -75,6 +76,7 @@ const Register = () => {
         signInWithGoogle()
         .then(result => {
             console.log(result.user)
+            saveUser(result.user)
             toast.success('Successfully logged in!')
             navigate(from, {replace: true})
         })
