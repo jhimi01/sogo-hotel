@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import { DateRange } from 'react-date-range';
 
-const DateReactRange = () => {
+import 'react-date-range/dist/styles.css'
+import 'react-date-range/dist/theme/default.css'
+
+const Calender = () => {
     const [state, setState] = useState([
         {
           startDate: new Date(),
@@ -15,10 +18,11 @@ const DateReactRange = () => {
   editableDateInputs={true}
   onChange={item => setState([item.selection])}
   moveRangeOnFirstSelection={false}
+  rangeColors={['#262626']}
   ranges={state}
 />
         </div>
     );
 };
 
-export default DateReactRange;
+export default Calender;

@@ -12,6 +12,10 @@ import RoomDetails from "./page/RoomDetails.jsx";
 import Privateroute from "./routes/Privateroute.jsx";
 import Dashboard from "./layouts/Dashboard.jsx";
 import AddRoom from "./page/Dashboard/AddRoom.jsx";
+import 'react-date-range/dist/styles.css'; // main css file
+import 'react-date-range/dist/theme/default.css'; // theme css file
+
+
 
 
 const router = createBrowserRouter([

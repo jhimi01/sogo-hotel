@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { FaHeart } from 'react-icons/fa';
 import { FiHeart } from 'react-icons/fi';
+import { Link } from 'react-router-dom';
 
 const Singleroom = ({room}) => {
   const { dateRange, image, location, price } = room;
@@ -9,7 +10,7 @@ const Singleroom = ({room}) => {
  
 
   return (
-    <div className='bg-base-300 relative my-8 cursor-pointer group'>
+    <Link to={`/room/3`} className='bg-base-300 relative my-8 cursor-pointer group'>
       <img className='w-full sm:w-[400px] h-[200px] group-hover:scale-105 transition' src={image} alt="" />
       <div className='flex justify-center'>
         <div className='w-5/6 h-[100px] bg-base-200 absolute z-20 -bottom-14 p-2 group-hover:drop-shadow-xl drop-shadow-lg'>
@@ -21,7 +22,7 @@ const Singleroom = ({room}) => {
           {like ? <FaHeart className='text-2xl text-white font-extrabold'/> :  <FiHeart  className='text-2xl text-white font-extrabold'/>}
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 
