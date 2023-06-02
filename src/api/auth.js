@@ -42,3 +42,4 @@ export const getRole = async(email)=>{
   const user = await response.json()
   return user?.role
 }
+

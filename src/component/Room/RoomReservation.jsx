@@ -3,13 +3,15 @@ import Calender from './Calender';
 import { AuthContext } from '../../providers/AuthProvider';
 import BookingModal from '../Modal/BookingModal';
 import { formatDistance } from 'date-fns';
-import { bookingRoom } from '../../api/booking';
+import { bookingRoom, updateStatus } from '../../api/booking';
 import { toast } from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
 const RoomReservation = ({roomData}) => {
 const totalPrice = parseFloat(formatDistance(new Date(roomData.to) , new Date(roomData.from)).split(' ')[0]) * roomData.price
 console.log(totalPrice);
     const {user, role} = useContext(AuthContext)
+    const navigate = useNavigate()
     const [isOpen, setIsOpen] = useState(false)
     const closeModal = ()=>{
       setIsOpen(false)
@@ -31,7 +33,9 @@ console.log(totalPrice);
         price: totalPrice,
         to: value.endDate,
         from: value.startDate,
-        title: roomData.title
+        title: roomData.title,
+        roomId: roomData._id,
+        image: roomData.image
     })
 
     const handleSelect=(ranges)=>{
@@ -41,10 +45,13 @@ console.log(totalPrice);
     const modalHandler =()=>{
       bookingRoom(bookingInfo)
       .then(data => {
-        toast.success('Booking Successfull!')
-        
+        updateStatus(roomData._id, true)
+        .then(data => {
+          toast.success('Booking Successfull!')
+          navigate('/dashboard/addroom')
         closeModal()
         console.log(data)
+        })
       }).catch(err => {
         closeModal()
         console.log(err)
@@ -59,7 +66,7 @@ console.log(totalPrice);
                  {/* calender */}
                <Calender value={value} handleSelect={handleSelect}></Calender>
                <hr />
-               <button onClick={()=> setIsOpen(true)} disabled={roomData.host.name === user.name} className='btn w-full'>Reserve</button>
+               <button onClick={()=> setIsOpen(true)} disabled={roomData.host.name === user.name || roomData.booked} className='btn w-full'>Reserve</button>
                <hr />
             <div className='flex w-full justify-between items-center font-semibold text-lg p-4'>
                <h2>Total</h2>

@@ -15,6 +15,7 @@ import AddRoom from "./page/Dashboard/AddRoom.jsx";
 import 'react-date-range/dist/styles.css'; // main css file
 import 'react-date-range/dist/theme/default.css'; // theme css file
 import { getRooms } from "./api/rooms.js";
+import MyBookings from "./page/Dashboard/MyBookings.jsx";
 
 
 
@@ -50,11 +51,15 @@ const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <Dashboard></Dashboard>,
+    element: <Privateroute> <Dashboard></Dashboard></Privateroute>,
     children: [
       {
         path: "/dashboard/addroom",
         element: <AddRoom></AddRoom>,
+      },
+      {
+        path: "/dashboard/my-bookings",
+        element: <MyBookings></MyBookings>,
       },
     ],
   },
