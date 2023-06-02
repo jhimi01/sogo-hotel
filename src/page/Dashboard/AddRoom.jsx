@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import AddRoomForm from '../../component/Forms/AddRoomForm';
 import { imgUpload } from '../../api/utils';
 import { AuthContext } from '../../providers/AuthProvider';
+import { addRoom } from '../../api/rooms';
 
 const AddRoom = () => {
 
@@ -26,6 +27,7 @@ const AddRoom = () => {
         const bedrooms = e.target.bedrooms.value;
         const bathrooms = e.target.bathrooms.value;
         const description = e.target.description.value;
+        const guest = e.target.total_guest.value;
         const image = e.target.elements.image.files[0];
         // upload image
         imgUpload(image).then(res => {
@@ -33,15 +35,24 @@ const AddRoom = () => {
             const roomData = {
                 image: res.data.display_url,
                 location,
-                category, title,price, bedrooms, description,bathrooms, 
+                category,
+                 title,price, bedrooms, description,bathrooms, 
                 host:{
                     name: user?.displayName,
                     image: user?.photoURL,
                     email: user?.email
                 },
-                to, from
+                to, 
+                from,
+                guest
             }
-            console.log(roomData)
+
+            addRoom(roomData)
+            .then(data => console.log(data))
+            .catch(err => console.log(err));
+
+
+            // console.log(roomData)
             setLoading(false)
         }).catch(error => {
             console.log(error.message)

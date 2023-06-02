@@ -53,7 +53,7 @@ const SideBar = () => {
           <div>
             <div className='w-full hidden md:flex py-2 justify-center items-center bg-white mx-auto'>
               <img src={Logo} height={'40px'} width={'40px'} alt="" />
-              <h3 className='text-xl font-bold ml-4'>Sogo Hotel</h3>
+              <Link to='/'><h3 className='text-xl font-bold ml-4'>Sogo Hotel</h3></Link>
             </div>
             <div className='flex flex-col items-center mt-6 -mx-2'>
               <Link to='/dashboard'>

@@ -14,6 +14,7 @@ import Dashboard from "./layouts/Dashboard.jsx";
 import AddRoom from "./page/Dashboard/AddRoom.jsx";
 import 'react-date-range/dist/styles.css'; // main css file
 import 'react-date-range/dist/theme/default.css'; // theme css file
+import { getRooms } from "./api/rooms.js";
 
 
 
@@ -34,6 +35,7 @@ const router = createBrowserRouter([
             <RoomDetails></RoomDetails>
           </Privateroute>
         ),
+        loader: ({params})=>getRooms(params.id)
       },
     ],
   },

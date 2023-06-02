@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Singleroom from './Singleroom';
 import { RiseLoader } from 'react-spinners';
 import { useSearchParams } from 'react-router-dom';
+import { getAllRooms } from '../../api/rooms';
 
 const Rooms = () => {
 
@@ -13,8 +14,7 @@ const Rooms = () => {
     const [loader, setLoader] = useState(true)
 
     useEffect(()=>{
-        fetch('rooms.json')
-        .then(res => res.json())
+       getAllRooms()
         .then(data => {
             if (category) {
                 const filtered = data.filter(room => room.category === category)

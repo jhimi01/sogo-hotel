@@ -17,3 +17,22 @@ export const saveUser = (user)=>{
     })
 
 };
+
+// save user hostname
+export const becomeHost = (email)=>{
+    const currentUser = {
+        role: 'host'
+    }
+
+
+    return  fetch(`http://localhost:5000/users/${email}`, {
+        method: 'PUT',
+        headers: {
+            'content-type': 'application/json'
+        },
+        body: JSON.stringify(currentUser)
+    })
+    .then(res => res.json())
+   
+
+};
