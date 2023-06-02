@@ -18,7 +18,7 @@ const MenuDropdown = () => {
   const modalHandler = email =>{
     becomeHost(email).then(data => {
         console.log(data)
-        toast('You are host now, Post Rooms')
+        toast.success('You are host now, Post Rooms')
         closeModal()
     })
   }

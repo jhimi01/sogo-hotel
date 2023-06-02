@@ -3,6 +3,8 @@ import Calender from './Calender';
 import { AuthContext } from '../../providers/AuthProvider';
 import BookingModal from '../Modal/BookingModal';
 import { formatDistance } from 'date-fns';
+import { bookingRoom } from '../../api/booking';
+import { toast } from 'react-hot-toast';
 
 const RoomReservation = ({roomData}) => {
 const totalPrice = parseFloat(formatDistance(new Date(roomData.to) , new Date(roomData.from)).split(' ')[0]) * roomData.price
@@ -37,7 +39,17 @@ console.log(totalPrice);
     }
 
     const modalHandler =()=>{
-      console.log(bookingInfo)
+      bookingRoom(bookingInfo)
+      .then(data => {
+        toast.success('Booking Successfull!')
+        
+        closeModal()
+        console.log(data)
+      }).catch(err => {
+        closeModal()
+        console.log(err)
+      });
+      // console.log(bookingInfo)
     }
 
     return (
