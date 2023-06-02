@@ -24,7 +24,6 @@ export const becomeHost = (email)=>{
         role: 'host'
     }
 
-
     return  fetch(`http://localhost:5000/users/${email}`, {
         method: 'PUT',
         headers: {
@@ -33,6 +32,13 @@ export const becomeHost = (email)=>{
         body: JSON.stringify(currentUser)
     })
     .then(res => res.json())
-   
 
 };
+
+// get role
+export const getRole = async(email)=>{
+  const response = await fetch(`http://localhost:5000/users/${email}`
+  )
+  const user = await response.json()
+  return user?.role
+}

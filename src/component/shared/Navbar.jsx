@@ -8,8 +8,9 @@ import MenuDropdown from './MenuDropDown';
 
 const Navbar = () => {
 
-  const { user, logOut } = useContext(AuthContext)
+  const { user, logOut, role } = useContext(AuthContext)
   const navigate = useNavigate()
+  console.log(role)
 
   const handlelogout =()=>{
     logOut()

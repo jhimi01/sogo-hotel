@@ -1,21 +1,60 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import Calender from './Calender';
+import { AuthContext } from '../../providers/AuthProvider';
+import BookingModal from '../Modal/BookingModal';
+import { formatDistance } from 'date-fns';
 
-const RoomReservation = () => {
+const RoomReservation = ({roomData}) => {
+const totalPrice = parseFloat(formatDistance(new Date(roomData.to) , new Date(roomData.from)).split(' ')[0]) * roomData.price
+console.log(totalPrice);
+    const {user, role} = useContext(AuthContext)
+    const [isOpen, setIsOpen] = useState(false)
+    const closeModal = ()=>{
+      setIsOpen(false)
+    }
+
+
+    const [value, setValue] = useState( {
+        startDate: new Date(roomData?.to),
+        endDate: new Date(roomData?.from),
+        key: 'selection'
+      })
+
+
+    // booking state
+    const [bookingInfo, setBookingInfo] = useState({
+        guest: {name: user.displayName, email: user.email, image: user.photoUrl},
+        host: roomData.host.email,
+        location: roomData.location,
+        price: totalPrice,
+        to: value.endDate,
+        from: value.startDate,
+        title: roomData.title
+    })
+
+    const handleSelect=(ranges)=>{
+      setValue({...value})
+    }
+
+    const modalHandler =()=>{
+      console.log(bookingInfo)
+    }
+
     return (
         <div className='bg-white rounded-xl border-[1px] border-neutral-200 overflow-hidden w-full'>
             <div className="flex flex-col  items-center p-4">
-                <div className="text-2xl font-semibold">&200 night</div>
+                <div className="text-2xl font-semibold">&{roomData.price} night</div>
                  {/* calender */}
-               <Calender></Calender>
+               <Calender value={value} handleSelect={handleSelect}></Calender>
                <hr />
-               <button className='btn w-full'>Reserve</button>
+               <button onClick={()=> setIsOpen(true)} disabled={roomData.host.name === user.name} className='btn w-full'>Reserve</button>
                <hr />
             <div className='flex w-full justify-between items-center font-semibold text-lg p-4'>
                <h2>Total</h2>
-               <h2>$ 300</h2>
+               <h2>$ {totalPrice}</h2>
             </div>
             </div>
+            <BookingModal closeModal={closeModal} modalHandler={modalHandler} isOpen={isOpen} bookingInfo={bookingInfo} ></BookingModal>
         </div>
     );
 };

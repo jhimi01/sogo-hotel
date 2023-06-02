@@ -16,7 +16,7 @@ const RoomInfo = ({roomData}) => {
               gap-2
             '
         >
-          <div>{host.name}</div>
+          <div>Hosted by {host.name}</div>
 
           <img
             className='rounded-full'

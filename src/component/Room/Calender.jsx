@@ -4,7 +4,7 @@ import { DateRange } from 'react-date-range';
 import 'react-date-range/dist/styles.css'
 import 'react-date-range/dist/theme/default.css'
 
-const Calender = () => {
+const Calender = ({value, handleSelect}) => {
     const [state, setState] = useState([
         {
           startDate: new Date(),
@@ -13,15 +13,17 @@ const Calender = () => {
         }
       ]);
     return (
-        <div>
+       
             <DateRange
   editableDateInputs={true}
-  onChange={item => setState([item.selection])}
+  onChange={handleSelect}
+  date={value.startDate}
   moveRangeOnFirstSelection={false}
   rangeColors={['#262626']}
-  ranges={state}
-/>
-        </div>
+  ranges={[value]}
+  minDate={value.startDate}
+  maxDate={value.endDate}/>
+       
     );
 };
 
