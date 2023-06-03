@@ -8,8 +8,10 @@ import { toast } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 
 const RoomReservation = ({roomData}) => {
-const totalPrice = parseFloat(formatDistance(new Date(roomData.to) , new Date(roomData.from)).split(' ')[0]) * roomData.price
-console.log(totalPrice);
+  console.log("roomData.to:", roomData.to);
+  console.log("roomData.from:", roomData.from);
+
+const totalPrice = parseFloat(formatDistance(new Date(roomData.to) , new Date(roomData.from)).split(' ')[0]) * roomData.price;
     const {user, role} = useContext(AuthContext)
     const navigate = useNavigate()
     const [isOpen, setIsOpen] = useState(false)
@@ -27,7 +29,10 @@ console.log(totalPrice);
 
     // booking state
     const [bookingInfo, setBookingInfo] = useState({
-        guest: {name: user.displayName, email: user.email, image: user.photoUrl},
+        guest: {name: user.displayName,
+           email: user.email,
+           image: user.photoUrl
+          },
         host: roomData.host.email,
         location: roomData.location,
         price: totalPrice,
@@ -48,7 +53,7 @@ console.log(totalPrice);
         updateStatus(roomData._id, true)
         .then(data => {
           toast.success('Booking Successfull!')
-          navigate('/dashboard/addroom')
+          navigate('/dashboard/add-room')
         closeModal()
         console.log(data)
         })

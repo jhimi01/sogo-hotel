@@ -4,8 +4,10 @@ import { FiHeart } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 
 const Singleroom = ({room}) => {
-  const { dateRange, image, location, price, _id, guest } = room;
+  const { dateRange, image, location, price, _id } = room;
   const [ like, setLike ] = useState(false)
+
+  console.log('room', room)
 
  
 

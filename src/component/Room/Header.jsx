@@ -3,7 +3,6 @@ import Heading from '../Heading';
 
 const Header = ({roomData}) => {
   const {title, location, image} = roomData;
-  console.log(location);
     return (
         <>
         <Heading

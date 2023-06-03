@@ -14,8 +14,9 @@ import Dashboard from "./layouts/Dashboard.jsx";
 import AddRoom from "./page/Dashboard/AddRoom.jsx";
 import 'react-date-range/dist/styles.css'; // main css file
 import 'react-date-range/dist/theme/default.css'; // theme css file
-import { getRooms } from "./api/rooms.js";
+import { getRoom } from "./api/rooms.js";
 import MyBookings from "./page/Dashboard/MyBookings.jsx";
+import MyListings from "./page/Dashboard/MyListing.jsx";
 
 
 
@@ -36,7 +37,7 @@ const router = createBrowserRouter([
             <RoomDetails></RoomDetails>
           </Privateroute>
         ),
-        loader: ({params})=>getRooms(params.id)
+        loader: ({params})=>getRoom(params.id)
       },
     ],
   },
@@ -54,12 +55,16 @@ const router = createBrowserRouter([
     element: <Privateroute> <Dashboard></Dashboard></Privateroute>,
     children: [
       {
-        path: "/dashboard/addroom",
+        path: "/dashboard/add-room",
         element: <AddRoom></AddRoom>,
       },
       {
         path: "/dashboard/my-bookings",
         element: <MyBookings></MyBookings>,
+      },
+      {
+        path: "/dashboard/my-listings",
+        element: <MyListings></MyListings>,
       },
     ],
   },
