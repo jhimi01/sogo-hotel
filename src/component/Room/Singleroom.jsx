@@ -9,7 +9,7 @@ const Singleroom = ({room}) => {
 
   console.log('room', room)
 
- 
+//  to={`/room/${_id}`}
 
   return (
     <Link to={`/room/${_id}`} className='bg-base-300 relative my-8 cursor-pointer group'>
