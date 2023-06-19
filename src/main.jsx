@@ -17,6 +17,7 @@ import 'react-date-range/dist/theme/default.css'; // theme css file
 import { getRoom } from "./api/rooms.js";
 import MyBookings from "./page/Dashboard/MyBookings.jsx";
 import MyListings from "./page/Dashboard/MyListing.jsx";
+import ManageBokings from "./page/Dashboard/ManageBokings.jsx";
 
 
 
@@ -37,7 +38,7 @@ const router = createBrowserRouter([
             <RoomDetails></RoomDetails>
           </Privateroute>
         ),
-        loader: ({params})=>getRoom(params.id)
+        loader: ({ params }) => getRoom(params.id)
       },
     ],
   },
@@ -55,6 +56,10 @@ const router = createBrowserRouter([
     element: <Privateroute> <Dashboard></Dashboard></Privateroute>,
     children: [
       {
+        path: "/dashboard",
+        element: <MyBookings></MyBookings>,
+      },
+      {
         path: "/dashboard/add-room",
         element: <AddRoom></AddRoom>,
       },
@@ -65,6 +70,10 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/my-listings",
         element: <MyListings></MyListings>,
+      },
+      {
+        path: "/dashboard/manageboking",
+        element: <ManageBokings></ManageBokings>,
       },
     ],
   },
