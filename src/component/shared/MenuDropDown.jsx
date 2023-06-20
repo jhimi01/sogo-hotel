@@ -1,13 +1,14 @@
 import { AiOutlineMenu } from 'react-icons/ai'
 // import Avatar from './Avatar'
 import { useCallback, useContext, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { AuthContext } from '../../providers/AuthProvider'
 import HostModal from '../Modal/HostModal'
 import { becomeHost } from '../../api/auth'
 import { toast } from 'react-hot-toast'
 
 const MenuDropdown = () => {
+  const navigate = useNavigate()
   const { user, logOut, role } = useContext(AuthContext)
   const [isOpen, setIsOpen] = useState(false)
   const [modal, setModal] = useState(false)
@@ -18,6 +19,7 @@ const MenuDropdown = () => {
   const modalHandler = email =>{
     becomeHost(email).then(data => {
         console.log(data)
+        navigate('/dashboard/add-room')
         toast.success('You are host now, Post Rooms')
         closeModal()
     })
@@ -31,7 +33,7 @@ const MenuDropdown = () => {
       <div className='flex flex-row items-center gap-3'>
         {/* Aircnc btn */}
         {/* <div onClick={()=>setModal(true)} className='hidden md:block text-sm font-semibold py-3 px-4 rounded-full hover:bg-neutral-100 transition cursor-pointer'> */}
-          <button disabled={!user} onClick={()=>setModal(true)} className='hidden md:block text-sm font-semibold py-3 px-4 rounded-full hover:bg-neutral-100 transition'>AirCNC your home</button>
+         {!role &&  <button disabled={!user} onClick={()=>setModal(true)} className='hidden md:block text-sm font-semibold py-3 px-4 rounded-full hover:bg-neutral-100 transition'>AirCNC your home</button>}
         {/* </div> */}
       </div>
       <HostModal email={user?.email} modalHandler={modalHandler} isOpen={modal} closeModal={closeModal}></HostModal>

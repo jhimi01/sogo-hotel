@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react"
 import { AuthContext } from "../../providers/AuthProvider"
 import { getBooking } from "../../api/booking"
 import TableRow from "../../component/Dashboard/TableRow"
+import EmptyState from "../../component/shared/EmptyState"
 
 const MyBookings = () => {
     const [bookings, setBookings] = useState([])
@@ -17,7 +18,8 @@ const MyBookings = () => {
 
 
     return (
-      <div className='container mx-auto px-4 sm:px-8'>
+     <>
+      {bookings && Array.isArray(bookings) && bookings.length > 0 ?  <div className='container mx-auto px-4 sm:px-8'>
         <div className='py-8'>
           <div className='-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto'>
             <div className='inline-block min-w-full shadow rounded-lg overflow-hidden'>
@@ -67,7 +69,8 @@ const MyBookings = () => {
             </div>
           </div>
         </div>
-      </div>
+      </div>: <EmptyState message={'you didnot add any rooms yet'} label={'Browsrooms'} address={'/'}/>}
+     </>
     )
   }
   

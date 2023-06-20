@@ -9,10 +9,10 @@ const Main = () => {
        <>
          <div className='w-full md:w-[90%] mx-auto'>
         <Navbar></Navbar>
-        <div>
+        <div className='min-h-[calc(100vh-140px)]'>
         <Outlet></Outlet>
         </div>
-       {/* <Footer></Footer> */}
+       <Footer></Footer>
         </div>
 
     
