@@ -13,6 +13,7 @@ import {
 import app from '../firebase/firebase.config'
 import { Toaster } from 'react-hot-toast'
 import { getRole } from '../api/auth'
+import axios from 'axios';
 
 
 export const AuthContext = createContext(null)
@@ -52,6 +53,7 @@ const AuthProvider = ({ children }) => {
   }
 
   const logOut = () => {
+    localStorage.removeItem('access_token')
     setLoading(true)
     return signOut(auth)
   }
@@ -66,7 +68,19 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, currentUser => {
       setUser(currentUser)
+    if(currentUser?.email){
+      axios.post(`${import.meta.env.VITE_API_URL}/jwt`, {
+        email: currentUser?.email
+      }).then(data => {
+          localStorage.setItem('access_token', data.data.token)
+          console.log(data)
+          setLoading(false)
+        })
+      
+    }else{
+      localStorage.removeItem('access_token')
       setLoading(false)
+    }
     })
     return () => {
       return unsubscribe()
