@@ -32,7 +32,11 @@ export const getRoom = async (id) => {
 
     // get filtered rooms for host
     export const getRoomsHost = async (email) => {
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/rooms/${email}`)
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/rooms/${email}`,{
+            headers: {
+                authorization: `Bearer ${localStorage.getItem('access_token')}`
+            }
+        })
         const data = await response.json()
         return data;
     }
