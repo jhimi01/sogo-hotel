@@ -48,22 +48,22 @@ const totalPrice = parseFloat(formatDistance(new Date(roomData.to) , new Date(ro
       setValue({...value})
     }
 
-    const modalHandler =()=>{
-      bookingRoom(bookingInfo)
-      .then(data => {
-        updateStatus(roomData._id, true)
-        .then(data => {
-          toast.success('Booking Successfull!')
-          navigate('/dashboard/add-room')
-        closeModal()
-        console.log(data)
-        })
-      }).catch(err => {
-        closeModal()
-        console.log(err)
-      });
-      // console.log(bookingInfo)
-    }
+    // const modalHandler =()=>{
+    //   bookingRoom(bookingInfo)
+    //   .then(data => {
+    //     updateStatus(roomData._id, true)
+    //     .then(data => {
+    //       toast.success('Booking Successfull!')
+    //       navigate('/dashboard/add-room')
+    //     closeModal()
+    //     console.log(data)
+    //     })
+    //   }).catch(err => {
+    //     closeModal()
+    //     console.log(err)
+    //   });
+    //   // console.log(bookingInfo)
+    // }
 
     return (
         <div className='bg-white rounded-xl border-[1px] border-neutral-200 overflow-hidden w-full'>
@@ -79,7 +79,9 @@ const totalPrice = parseFloat(formatDistance(new Date(roomData.to) , new Date(ro
                <h2>$ {totalPrice}</h2>
             </div>
             </div>
-            <BookingModal closeModal={closeModal} modalHandler={modalHandler} isOpen={isOpen} bookingInfo={bookingInfo} ></BookingModal>
+            <BookingModal closeModal={closeModal} 
+            // modalHandler={modalHandler}
+             isOpen={isOpen} bookingInfo={bookingInfo} ></BookingModal>
         </div>
     );
 };

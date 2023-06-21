@@ -4,29 +4,48 @@ import { AuthContext } from "../../providers/AuthProvider"
 import RoomDataRow from "../../component/Dashboard/RoomDataRow"
 import EmptyState from "../../component/shared/EmptyState"
 import useAxiosSecure from "../../hooks/useAxiosSecure"
+import { useQuery } from "@tanstack/react-query"
 
 const MyListings = () => {
 
-    const [listings, setListings] = useState([])
-    const {user} = useContext(AuthContext)
+    // const [listings, setListings] = useState([])
+    const {user, loading} = useContext(AuthContext)
     const [axiosSecure] = useAxiosSecure()
-
-    
-    const fetchRooms = ()=>{
-      axiosSecure.get(`/rooms/${user?.email}`).then(data => setListings(data.data))
-    }
 
     // const fetchRooms = ()=>{
     //   getRoomsHost(user?.email).then(data => {
     //         setListings(data)
     //     })
     // }
+    // useEffect(()=>{
+    //     fetchRooms()
+    // },[user])
 
 
-    useEffect(()=>{
-        fetchRooms()
-    },[user])
+    // const {data: rooms = []} = useQuery({ 
+    //   queryKey: ['rooms', user?.email],
+    //   enabled: !loading,
+    //  queryFn: async ()=>{
+    //   const res = await axiosSecure.get(`/rooms/${user?.email}`)
+    //   console.log('res from axios', res.data)
+    //   setListings( res.data)
+    // } })
 
+    // const fetchRooms = async () => {
+    //   const res = await axiosSecure.get(`/rooms/${user?.email}`)
+    //   return res.data
+    // }
+  
+    const { data: listings = [], refetch } = useQuery({
+      queryKey: ['rooms', user?.email],
+      enabled: !loading,
+      queryFn: async () => {
+        const res = await axiosSecure.get(`/rooms/${user?.email}`)
+        console.log('res from axios', res.data)
+        return res.data
+      }
+})
+  
 
     return (
       <>
@@ -81,7 +100,9 @@ const MyListings = () => {
                     </th>
                   </tr>
                 </thead>
-                <tbody>{listings && listings.map(listing => <RoomDataRow key={listing._id} room={listing} fetchRooms={fetchRooms}></RoomDataRow>)}</tbody>
+                <tbody>{listings && listings.map(listing => <RoomDataRow key={listing._id} room={listing} 
+                fetchRooms={refetch}
+                ></RoomDataRow>)}</tbody>
               </table>
             </div>
           </div>
