@@ -5,7 +5,7 @@ import { deleteRoom } from '../../api/rooms'
 import { toast } from 'react-hot-toast'
 import UpdateModal from '../Modal/UpdateModal'
 
-const RoomDataRow = ({ room, fetchRooms }) => {
+const RoomDataRow = ({ room, fetchRooms, refetch }) => {
     let [isOpen, setIsOpen] = useState(false)
     let [isEditModal, setIsEditModal] = useState(false)
     function closeModal() {
@@ -78,7 +78,7 @@ const RoomDataRow = ({ room, fetchRooms }) => {
           ></span>
           <span className='relative'>Update</span>
         </span>
-        <UpdateModal isOpen={isEditModal} setIsEditModal={setIsEditModal}></UpdateModal>
+        <UpdateModal isOpen={isEditModal} setIsEditModal={setIsEditModal} refetch ={refetch } room={room} id={room._id}></UpdateModal>
       </td>
     </tr>
   )

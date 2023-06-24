@@ -41,6 +41,8 @@ export const getRoom = async (id) => {
         return data;
     }
 
+
+    // delete a room
     export const deleteRoom = async (id) => {
         const response = await fetch(`${import.meta.env.VITE_API_URL}/room/${id}`, {
             method: 'DELETE',
@@ -48,4 +50,21 @@ export const getRoom = async (id) => {
         })
         const result = await response.json()
         return result
+    }
+
+
+    // update room
+    export const updateroom = async(roomdata, id)=>{
+       const response = await fetch(`${import.meta.env.VITE_API_URL}/room/${id}`, {
+        method: 'PUT',
+        headers: {
+            'content-type': 'application/json',
+            // authorization: `Bearer ${localStorage.getItem('access_token')}`,
+        },
+        body: JSON.stringify(roomdata)
+       })
+
+       const data = await response.json()
+       return data
+
     }
