@@ -23,7 +23,7 @@ const Navbar = () => {
         <div className="navbar-start">
         <div className=" flex items-center">
         <img src={logo} alt="logo" width='40px' />
-          <Link to='/'><a className="btn btn-ghost normal-case text-lg hidden md:block pt-2">Sogo Hotel</a></Link>
+          <Link to='/'><a className="btn btn-ghost normal-case text-lg hidden md:block pt-2">airbnb</a></Link>
         </div>
         </div>
         <div className="navbar-center">
