@@ -12,21 +12,16 @@ import RoomDetails from "./page/RoomDetails.jsx";
 import Privateroute from "./routes/Privateroute.jsx";
 import Dashboard from "./layouts/Dashboard.jsx";
 import AddRoom from "./page/Dashboard/AddRoom.jsx";
-import 'react-date-range/dist/styles.css'; // main css file
-import 'react-date-range/dist/theme/default.css'; // theme css file
+import "react-date-range/dist/styles.css"; // main css file
+import "react-date-range/dist/theme/default.css"; // theme css file
 import { getRoom } from "./api/rooms.js";
 import MyBookings from "./page/Dashboard/MyBookings.jsx";
 import MyListings from "./page/Dashboard/MyListing.jsx";
 import ManageBokings from "./page/Dashboard/ManageBokings.jsx";
-import {
-  QueryClient, QueryClientProvider,
-} from '@tanstack/react-query'
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 // Create a client
-const queryClient = new QueryClient()
-
-
-
+const queryClient = new QueryClient();
 
 const router = createBrowserRouter([
   {
@@ -44,7 +39,7 @@ const router = createBrowserRouter([
             <RoomDetails></RoomDetails>
           </Privateroute>
         ),
-        loader: ({ params }) => getRoom(params.id)
+        loader: ({ params }) => getRoom(params.id),
       },
     ],
   },
@@ -59,7 +54,12 @@ const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <Privateroute> <Dashboard></Dashboard></Privateroute>,
+    element: (
+      <Privateroute>
+        {" "}
+        <Dashboard></Dashboard>
+      </Privateroute>
+    ),
     children: [
       {
         path: "/dashboard",
@@ -88,9 +88,9 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <AuthProvider>
-    <QueryClientProvider client={queryClient}>
-      <RouterProvider router={router} />
-    </QueryClientProvider>
+      <QueryClientProvider client={queryClient}>
+        <RouterProvider router={router} />
+      </QueryClientProvider>
     </AuthProvider>
   </React.StrictMode>
 );
