@@ -93,7 +93,7 @@ const Register = () => {
       <div className='flex flex-col max-w-md p-6 rounded-md sm:p-10 bg-gray-100 text-gray-900'>
         <div className='mb-8 text-center'>
           <h1 className='my-3 text-4xl font-bold'>Sign Up</h1>
-          <p className='text-sm text-gray-400'>Welcome to airbnb</p>
+          <p className='text-sm text-gray-400'>Welcome to Sogo Hotel</p>
         </div>
         <form
           noValidate=''
