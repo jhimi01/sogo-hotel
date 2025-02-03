@@ -2,7 +2,6 @@ import React from 'react'
 import { DateRange } from 'react-date-range'
 import { TbFidgetSpinner } from 'react-icons/tb'
 import { categories } from '../Catagories/catagoris'
-// import { categories } from '../Categories/categoriesData'
 const UpdateRoomForm = ({
     handleSubmit,
     dates,
@@ -21,7 +20,7 @@ const UpdateRoomForm = ({
             Location
           </label>
           <input
-            className='w-full px-4 py-3 text-gray-800 border border-rose-300 focus:outline-rose-500 rounded-md '
+            className='w-full px-4 py-3 text-gray-800 border border-black focus:outline-black rounded-md '
             name='location'
             value={roomData?.location}
             onChange={event =>
@@ -42,7 +41,7 @@ const UpdateRoomForm = ({
             onChange={event =>
               setRoomData({ ...roomData, title: event.target.value })
             }
-            className='w-full px-4 py-3 text-gray-800 border border-rose-300 focus:outline-rose-500 rounded-md '
+            className='w-full px-4 py-3 text-gray-800 border border-black focus:outline-black rounded-md '
             name='title'
             id='title'
             type='text'
@@ -61,7 +60,7 @@ const UpdateRoomForm = ({
             }
             required
             defaultValue={roomData.category}
-            className='w-full px-4 py-3 border-rose-300 focus:outline-rose-500 rounded-md'
+            className='w-full px-4 py-3 border-black focus:outline-black rounded-md'
             name='category'
           >
             {categories.map(category => (
@@ -80,7 +79,7 @@ const UpdateRoomForm = ({
             <DateRange
               onChange={handleDates}
               ranges={[dates]}
-              rangeColors={['#F43F5E']}
+              rangeColors={['#000000']}
             />
           </div>
         </div>
@@ -100,7 +99,7 @@ const UpdateRoomForm = ({
                   accept='image/*'
                   hidden
                 />
-                <div className='bg-rose-500 text-white border border-gray-300 rounded font-semibold cursor-pointer p-1 px-3 hover:bg-rose-500'>
+                <div className='bg-black text-white border border-gray-300 rounded font-semibold cursor-pointer p-1 px-3 hover:bg-black'>
                   Upload Image
                 </div>
               </label>
@@ -117,7 +116,7 @@ const UpdateRoomForm = ({
               onChange={event =>
                 setRoomData({ ...roomData, price: event.target.value })
               }
-              className='w-full px-4 py-3 text-gray-800 border border-rose-300 focus:outline-rose-500 rounded-md '
+              className='w-full px-4 py-3 text-gray-800 border border-black focus:outline-black rounded-md '
               name='price'
               id='price'
               type='number'
@@ -135,7 +134,7 @@ const UpdateRoomForm = ({
               onChange={event =>
                 setRoomData({ ...roomData, guests: event.target.value })
               }
-              className='w-full px-4 py-3 text-gray-800 border border-rose-300 focus:outline-rose-500 rounded-md '
+              className='w-full px-4 py-3 text-gray-800 border border-black focus:outline-black rounded-md '
               name='total_guest'
               id='guest'
               type='number'
@@ -155,7 +154,7 @@ const UpdateRoomForm = ({
               onChange={event =>
                 setRoomData({ ...roomData, bedrooms: event.target.value })
               }
-              className='w-full px-4 py-3 text-gray-800 border border-rose-300 focus:outline-rose-500 rounded-md '
+              className='w-full px-4 py-3 text-gray-800 border border-black focus:outline-black rounded-md '
               name='bedrooms'
               id='bedrooms'
               type='number'
@@ -173,7 +172,7 @@ const UpdateRoomForm = ({
               onChange={event =>
                 setRoomData({ ...roomData, bathrooms: event.target.value })
               }
-              className='w-full px-4 py-3 text-gray-800 border border-rose-300 focus:outline-rose-500 rounded-md '
+              className='w-full px-4 py-3 text-gray-800 border border-black focus:outline-black rounded-md '
               name='bathrooms'
               id='bathrooms'
               type='number'
@@ -194,7 +193,7 @@ const UpdateRoomForm = ({
               setRoomData({ ...roomData, description: event.target.value })
             }
             id='description'
-            className='block rounded-md focus:rose-300 w-full h-32 px-4 py-3 text-gray-800  border border-rose-300 focus:outline-rose-500 '
+            className='block rounded-md focus:black w-full h-32 px-4 py-3 text-gray-800  border border-black focus:outline-black'
             name='description'
           ></textarea>
         </div>
@@ -202,7 +201,7 @@ const UpdateRoomForm = ({
 
       <button
         type='submit'
-        className='w-full p-3 mt-5 text-center font-medium text-white transition duration-200 rounded shadow-md bg-rose-500'
+        className='w-full p-3 mt-5 text-center font-medium text-white transition duration-200 rounded shadow-md bg-black'
       >
         {loading ? (
           <TbFidgetSpinner className='m-auto animate-spin' size={24} />

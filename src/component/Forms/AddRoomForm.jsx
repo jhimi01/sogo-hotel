@@ -1,7 +1,7 @@
 import React from "react";
 import { DateRange } from "react-date-range";
-import { TbFidgetSpinner } from "react-icons/tb";
 import { categories } from "../Catagories/catagoris";
+import { FaSpinner } from "react-icons/fa";
 
 const AddRoomForm = ({
   handleSubmit,
@@ -173,7 +173,7 @@ const AddRoomForm = ({
           className="w-full p-3 mt-5 text-center font-medium text-white transition duration-200 rounded shadow-md bg-black"
         >
           {loading ? (
-            <TbFidgetSpinner className="m-auto animate-spin" size={24} />
+            <FaSpinner className="m-auto animate-spin" size={24} />
           ) : (
             "Save & Continue"
           )}
