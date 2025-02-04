@@ -15,8 +15,6 @@ const Register = () => {
     const location = useLocation()
     const from = location.state?.from?.pathname || '/';
 
-    // https://api.imgbb.com/1/upload
-
 
     const handleSubmit =(e)=>{
         e.preventDefault();
